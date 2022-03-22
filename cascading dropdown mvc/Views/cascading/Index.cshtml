@@ -1,0 +1,68 @@
+﻿@model cascading_dropdown_mvc.Models.usercountry
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Cascading Dropdown</h2>
+<div class="container mt-3">
+<form action="@Url.Action("Index", "cascading")" method="post">
+@Html.TextBoxFor(x=> x.name)
+                     
+@Html.DropDownListFor(x => x.countryid, Model.countylist,"select country")
+<br />
+<br/>
+@Html.DropDownListFor(x => x.stateid, Model.statelist)
+<br />
+<br />
+@Html.DropDownListFor(x => x.cityid, Model.citylist)
+</form>
+</div>
+
+
+<script type="text/javascript" src="../../Scripts/jquery-1.4.4.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var ddlcountries = $('#countryid');
+        var ddlstates = $('#stateid');
+        var ddlCities = $('#cityid');
+
+        ddlcountries.change(function () {
+            //alert(ddlcountries.val());
+            $.ajax({
+                url: '/cascading/GetStatesByCountryId',
+                method: 'get',
+                data: { countryid: $(this).val() },
+                dataType: 'json',
+                success: function (data) {
+                    ddlstates.empty();
+                    ddlstates.append($('<option/>', { value: 0, text: 'Select States' }));
+                    $(data).each(function (index, item) {
+                        ddlstates.append($('<option/>', { value: item.Value, text: item.Text }));
+                    });
+                }
+            });
+        });
+
+        ddlstates.change(function () {
+            //alert(ddlcountries.val());
+            $.ajax({
+                url: '/cascading/GetcityByStateId',
+                method: 'get',
+                data: { stateid: $(this).val() },
+                dataType: 'json',
+                success: function (data) {
+                    ddlCities.empty();
+                    ddlCities.append($('<option/>', { value: 0, text: 'Select Cities' }));
+                    $(data).each(function (index, item) {
+                        ddlCities.append($('<option/>', { value: item.Value, text: item.Text }));
+                    });
+                }
+            });
+
+        });
+
+
+    });
+
+</script>

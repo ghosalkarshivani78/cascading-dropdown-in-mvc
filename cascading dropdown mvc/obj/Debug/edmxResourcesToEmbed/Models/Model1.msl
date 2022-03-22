@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="test3ModelStoreContainer" CdmEntityContainer="test3Entities1">
+    <EntitySetMapping Name="cities">
+      <EntityTypeMapping TypeName="test3Model.city">
+        <MappingFragment StoreEntitySet="city">
+          <ScalarProperty Name="cityid" ColumnName="cityid" />
+          <ScalarProperty Name="cityname" ColumnName="cityname" />
+          <ScalarProperty Name="stateid" ColumnName="stateid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="countries">
+      <EntityTypeMapping TypeName="test3Model.country">
+        <MappingFragment StoreEntitySet="country">
+          <ScalarProperty Name="countryid" ColumnName="countryid" />
+          <ScalarProperty Name="countryname" ColumnName="countryname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="states">
+      <EntityTypeMapping TypeName="test3Model.state">
+        <MappingFragment StoreEntitySet="state">
+          <ScalarProperty Name="stateid" ColumnName="stateid" />
+          <ScalarProperty Name="statename" ColumnName="statename" />
+          <ScalarProperty Name="countryid" ColumnName="countryid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
